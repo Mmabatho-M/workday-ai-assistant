@@ -35,7 +35,7 @@ import {
 } from "@/components/ui-bits";
 import { generateSchedule } from "@/lib/ai.functions";
 import { useStore } from "@/lib/store";
-import { formatDuration, isoDate, type EventType } from "@/lib/demo-data";
+import { PRIORITIES, formatDuration, isoDate, type EventType } from "@/lib/demo-data";
 import { durationBetween, errorMessage } from "@/lib/time";
 import type { PlanResult } from "@/lib/ai-schemas";
 
@@ -271,19 +271,16 @@ function PlannerPage() {
                     if (!items.length) return;
                     replaceDayEvents(
                       isoDate(0),
-                      items.map((i) => ({
-                        title: i.title,
-                        start: i.start,
-                        end: i.end,
-                        type: eventTypeFor(i.priority),
-                        priority:
-                          i.priority === "Critical" ||
-                          i.priority === "High" ||
-                          i.priority === "Medium" ||
-                          i.priority === "Low"
-                            ? i.priority
-                            : undefined,
-                      })),
+                      items.map((i) => {
+                        const known = PRIORITIES.find((p) => p === i.priority);
+                        return {
+                          title: i.title,
+                          start: i.start,
+                          end: i.end,
+                          type: eventTypeFor(i.priority),
+                          ...(known ? { priority: known } : {}),
+                        };
+                      }),
                     );
                     toast.success("Schedule applied to today's calendar", {
                       description: "Existing items for today were replaced. Nothing else changed.",
