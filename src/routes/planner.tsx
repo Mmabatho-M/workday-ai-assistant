@@ -35,7 +35,7 @@ import {
 } from "@/components/ui-bits";
 import { generateSchedule } from "@/lib/ai.functions";
 import { useStore } from "@/lib/store";
-import { formatDuration, isoDate, type EventType } from "@/lib/demo-data";
+import { PRIORITIES, formatDuration, isoDate, type EventType } from "@/lib/demo-data";
 import { durationBetween, errorMessage } from "@/lib/time";
 import type { PlanResult } from "@/lib/ai-schemas";
 
