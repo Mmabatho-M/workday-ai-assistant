@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppStoreProvider } from "../lib/store";
 import { AppShell } from "../components/app-shell";
 import { Toaster } from "../components/ui/sonner";
+import { TooltipProvider } from "../components/ui/tooltip";
 
 function NotFoundComponent() {
   return (
@@ -131,11 +132,13 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AppStoreProvider>
-        <AppShell>
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
-        </AppShell>
-        <Toaster position="bottom-right" richColors closeButton />
+        <TooltipProvider delayDuration={200}>
+          <AppShell>
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+          </AppShell>
+          <Toaster position="bottom-right" richColors closeButton />
+        </TooltipProvider>
       </AppStoreProvider>
     </QueryClientProvider>
   );

@@ -15,6 +15,7 @@ import { Route as ChatRouteImport } from './routes/chat'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as ResearchRouteImport } from './routes/research'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as TasksRouteImport } from './routes/tasks'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const ResearchRoute = ResearchRouteImport.update({
   path: '/research',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/planner': typeof PlannerRoute
   '/research': typeof ResearchRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/planner': typeof PlannerRoute
   '/research': typeof ResearchRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/planner': typeof PlannerRoute
   '/research': typeof ResearchRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/planner'
     | '/research'
+    | '/settings'
     | '/tasks'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/planner'
     | '/research'
+    | '/settings'
     | '/tasks'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/planner'
     | '/research'
+    | '/settings'
     | '/tasks'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   PlannerRoute: typeof PlannerRoute
   ResearchRoute: typeof ResearchRoute
+  SettingsRoute: typeof SettingsRoute
   TasksRoute: typeof TasksRoute
 }
 
@@ -165,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tasks': {
       id: '/tasks'
       path: '/tasks'
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   PlannerRoute: PlannerRoute,
   ResearchRoute: ResearchRoute,
+  SettingsRoute: SettingsRoute,
   TasksRoute: TasksRoute,
 }
 export const routeTree = rootRouteImport
